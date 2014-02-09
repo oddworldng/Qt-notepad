@@ -3,5 +3,8 @@
         <file>Open-icon.png</file>
         <file>exit.png</file>
         <file>save-icon.png</file>
+        <file>format-text-bold.png</file>
+        <file>format-text-subrayado.png</file>
+        <file>Text-Formatting-Italic-icon.png</file>
     </qresource>
 </RCC>

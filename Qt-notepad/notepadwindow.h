@@ -6,7 +6,8 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
-#include <QPlainTextEdit>
+//#include <QPlainTextEdit>
+#include <QTextEdit>
 #include <QFileDialog>
 #include <QFile>
 #include <QFontDialog>
@@ -15,7 +16,6 @@
 #include <QMessageBox> // Ventana de mensajes
 #include <QToolBar>
 #include <QIcon>
-#include <QImage>
 
 class NotepadWindow : public QMainWindow
 {
@@ -29,6 +29,9 @@ private slots:
     void alAbrir();
     void alGuardar();
     void alFuente();
+    void alFuenteBold();
+    void alFuenteCursiva();
+    void alFuenteSubrayado();
     void alAcercaDe();
 
 private:
@@ -51,6 +54,9 @@ private:
     // Formato
     QMenu*          mnuFormato_;
     QAction*        actFormatoFuente_;
+    QAction*        actFormatoNegrita_;
+    QAction*        actFormatoCursiva_;
+    QAction*        actFormatoSubrayado_;
 
     // Ayuda
     QMenu*          mnuAyuda_;
@@ -58,7 +64,8 @@ private:
 
     QToolBar*       tool_;
 
-    QPlainTextEdit* txtEditor_;
+    //QPlainTextEdit* txtEditor_;
+    QTextEdit* txtEditor_;
     QClipboard *    portapapeles_;
 
 };

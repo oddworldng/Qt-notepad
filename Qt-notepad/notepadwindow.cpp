@@ -63,6 +63,15 @@ NotepadWindow::NotepadWindow(QWidget *parent) : QMainWindow(parent){
     actFormatoFuente_ = new QAction(tr("&Fuente"), this);
     mnuFormato_->addAction(actFormatoFuente_);
 
+    actFormatoNegrita_ = new QAction(QIcon(":/new/prefix1/format-text-bold.png"),"", this); // Negrita
+    tool_->addAction(actFormatoNegrita_);
+
+    actFormatoCursiva_ = new QAction(QIcon(":/new/prefix1/Text-Formatting-Italic-icon.png"),"", this); // Cursiva
+    tool_->addAction(actFormatoCursiva_);
+
+    actFormatoSubrayado_ = new QAction(QIcon(":/new/prefix1/format-text-subrayado.png"),"", this); // Subrayado
+    tool_->addAction(actFormatoSubrayado_);
+
     // Ayuda
     mnuAyuda_ = new QMenu(tr("&Ayuda"), this);
     mainMenu_->addMenu(mnuAyuda_);
@@ -76,7 +85,7 @@ NotepadWindow::NotepadWindow(QWidget *parent) : QMainWindow(parent){
     this->addToolBar(tool_);
 
     //Inicializamos el editor de texto
-    txtEditor_ = new QPlainTextEdit(this);
+    txtEditor_ = new QTextEdit(this);
 
     //Conectamos las acciones de los menús con nuestros slots
     connect(actArchivoAbrir_,   SIGNAL(triggered()), this,          SLOT(alAbrir()));
@@ -90,6 +99,9 @@ NotepadWindow::NotepadWindow(QWidget *parent) : QMainWindow(parent){
     connect(actEditarRehacer_,  SIGNAL(triggered()), txtEditor_,    SLOT(redo()));
 
     connect(actFormatoFuente_,  SIGNAL(triggered()), this,          SLOT(alFuente()));
+    connect(actFormatoNegrita_, SIGNAL(triggered()), this,          SLOT(alFuenteBold()));
+    connect(actFormatoCursiva_, SIGNAL(triggered()), this,          SLOT(alFuenteCursiva()));
+    connect(actFormatoSubrayado_,SIGNAL(triggered()), this,         SLOT(alFuenteSubrayado()));
 
     // Ayuda
     connect(actAcercaDe_,       SIGNAL(triggered()), this,          SLOT(alAcercaDe()));
@@ -127,7 +139,7 @@ void NotepadWindow::alAbrir()
         archivo.setFileName(nombreArchivo);
         if (archivo.open(QFile::ReadOnly)) {
             //Si se pudo abrir el archivo, lo leemos y colocamos su contenido en nuestro editor
-            txtEditor_->setPlainText(archivo.readAll());
+            txtEditor_->setText(archivo.readAll());
             //Se cierra el fichero
             archivo.close();
         }
@@ -164,6 +176,57 @@ void NotepadWindow::alFuente()
         txtEditor_->setFont(font);
     }
 }
+
+void NotepadWindow::alFuenteBold()
+{
+
+    QTextCursor cursor = txtEditor_->textCursor();
+    QTextCharFormat formato = cursor.charFormat();
+    QFont font;
+    if (formato.fontWeight() == QFont::Bold) {
+        font.setBold(false);
+    }
+    else {
+        font.setBold(true);
+    }
+    formato.setFont(font);
+    cursor.setCharFormat(formato);
+}
+
+
+void NotepadWindow::alFuenteCursiva()
+{
+    QTextCursor cursor = txtEditor_->textCursor();
+    QTextCharFormat formato = cursor.charFormat();
+    QFont font;
+    if (formato.fontItalic()) {
+        font.setItalic(false);
+    }
+    else {
+        font.setItalic(true);
+    }
+    formato.setFont(font);
+    cursor.setCharFormat(formato);
+}
+
+
+void NotepadWindow::alFuenteSubrayado()
+{
+
+    QTextCursor cursor = txtEditor_->textCursor();
+    QTextCharFormat formato = cursor.charFormat();
+    QFont font;
+    if (formato.underlineStyle()) {
+        font.setUnderline(false);
+    }
+    else {
+        font.setUnderline(true);
+    }
+    formato.setFont(font);
+    cursor.setCharFormat(formato);
+}
+
+
 
 void NotepadWindow::alAcercaDe(){
 
