@@ -22,14 +22,15 @@ NotepadWindow::NotepadWindow(QWidget *parent) : QMainWindow(parent){
     mnuArchivo_->addAction(actArchivoAbrir_);
     tool_->addAction(actArchivoAbrir_);
 
-    actArchivoGuardar_ = new QAction(QIcon(":/new/prefix1/save.jpeg"),tr("&Guardar"), this);
+    actArchivoGuardar_ = new QAction(QIcon(":/new/prefix1/save-icon.png"),tr("&Guardar"), this);
     actArchivoGuardar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     mnuArchivo_->addAction(actArchivoGuardar_);
     tool_->addAction(actArchivoGuardar_);
 
-    actArchivoCerrar_ = new QAction(tr("&Cerrar"), this);
+    actArchivoCerrar_ = new QAction(QIcon(":/new/prefix1/exit.png"),tr("&Salir"), this);
     actArchivoCerrar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     mnuArchivo_->addAction(actArchivoCerrar_);
+    tool_->addAction(actArchivoCerrar_);
 
     // Editar
     mnuEditar_ = new QMenu(tr("&Editar"), this);
