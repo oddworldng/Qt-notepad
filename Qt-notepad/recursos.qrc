@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>save.jpeg</file>
+        <file>Open-icon.png</file>
+    </qresource>
+</RCC>
